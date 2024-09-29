@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="de-DE">
+<html lang="en-EN">
   <head>
     <meta name="theme-color" content="#101728" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="26387fa4f5b1e3f7b6217b27d79bf264.png" type="image/png" sizes="16x16">
-    <link rel="icon" href="2d0b56e7e51cf11036ad8734bdb67e2d.png" type="image/png" sizes="32x32">
-    <link rel="apple-touch-icon" href="725b756a69a7d4c235070e51acd85560.png" sizes="180x180">
+    <link rel="icon" href="https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/main/bna.ico" type="image/png" sizes="16x16">
+    <link rel="icon" href="https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/main/bna.ico" type="image/png" sizes="32x32">
     <style>
       :root {
         --ffsd: 0px;
@@ -3058,69 +3057,78 @@
   </head>
 
 <script>
-function showDiscordUsernamePopup() {
-  const popup = document.createElement('div');
-  popup.style.position = 'fixed';
-  popup.style.top = '50%';
-  popup.style.left = '50%';
-  popup.style.transform = 'translate(-50%, -50%)';
-  popup.style.backgroundColor = '#101728';
-  popup.style.color = 'white';
-  popup.style.padding = '40px';
-  popup.style.borderRadius = '20px';
-  popup.style.textAlign = 'center';
-  popup.style.fontFamily = 'sans-serif';
-  popup.style.zIndex = '9999';
-  popup.style.width = '250px';
-  popup.style.border = '1px solid white';
+  function showDiscordUsernamePopup() {
+    const popup = document.createElement('div');
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.backgroundColor = '#101728';
+    popup.style.color = 'white';
+    popup.style.padding = '40px';
+    popup.style.borderRadius = '20px';
+    popup.style.textAlign = 'center';
+    popup.style.fontFamily = 'sans-serif';
+    popup.style.zIndex = '9999';
+    popup.style.width = '250px';
+    popup.style.border = '1px solid white';
+    
+    const popupContent = document.createElement('div');
+    popupContent.innerHTML = `
+      <h2 style="font-size: 24px; margin-bottom: 20px;">My discord username:</h2>
+      <p style="font-size: 18px; margin-bottom: 30px;">binnichtaktiv</p>
+      <button id="closePopup" style="background-color: white; color: #101728; padding: 14px 28px; border: none; cursor: pointer; border-radius: 20px; font-size: 16px; font-family: sans-serif;">OK</button>
+    `;
+    popup.appendChild(popupContent);
   
-  const popupContent = document.createElement('div');
-  popupContent.innerHTML = `
-    <h2 style="font-size: 24px; margin-bottom: 20px;">My discord username:</h2>
-    <p style="font-size: 18px; margin-bottom: 30px;">binnichtaktiv</p>
-    <button id="closePopup" style="background-color: white; color: #101728; padding: 14px 28px; border: none; cursor: pointer; border-radius: 20px; font-size: 16px; font-family: sans-serif;">OK</button>
-  `;
-  popup.appendChild(popupContent);
-
-  document.body.appendChild(popup);
-
-  const closeButton = document.getElementById('closePopup');
-  closeButton.addEventListener('click', () => {
-    popup.remove();
-  });
-}
-
-// make buttons clickable
-function makeButtonsClickable() {
-  const buttons = [
-  { id: 's1hpnlDDvaNOw3D7', url: 'https://github.com/binnichtaktiv' },
-  { id: 'MECrJ3QZvu3aSeTj', url: 'https://www.reddit.com/user/Binnichtaktiv_' },
-  { id: 'D9lH0XiRUd4nODVT', url: 'https://twitter.com/Binnichtaktiv06' },
-  { id: 'lgBibIqnx8CRWwQK', url: 'https://t.me/binnichtaktiv' },
-    { id: 'jg5j1CLWG4VVEh80', showPopup: true },
-  { id: 'X492eCjcnUrymQin', url: 'https://paypal.me/binnichtaktiv' },
-  { id: 'QEEXxGJy2czgb6Xs', url: 'https://ko-fi.com/binnichtaktiv' },
-  { id: 'Y63QEMuVKR7FNrwJ', url: 'https://revolut.me/jonas2xn2' }
-  ];
-  buttons.forEach(button => {
-    const element = document.getElementById(button.id);
-    if (element) {
-      element.style.cursor = 'pointer';
-      element.style.borderRadius = '20px';
-      element.style.fontFamily = 'sans-serif';
-      if (button.showPopup) {
-        element.addEventListener('click', showDiscordUsernamePopup);
-      } else {
-        element.addEventListener('click', function() {
-          window.open(button.url, '_blank');
-        });
+    document.body.appendChild(popup);
+  
+    const closeButton = document.getElementById('closePopup');
+    closeButton.addEventListener('click', () => {
+      popup.remove();
+    });
+  }
+  
+  function makeButtonsClickable() {
+    const buttons = [
+      { id: 's1hpnlDDvaNOw3D7', url: 'https://github.com/binnichtaktiv' },
+      { id: 'MECrJ3QZvu3aSeTj', url: 'https://www.reddit.com/user/Binnichtaktiv_' },
+      { id: 'D9lH0XiRUd4nODVT', url: 'https://twitter.com/Binnichtaktiv06' },
+      { id: 'lgBibIqnx8CRWwQK', url: 'https://t.me/binnichtaktiv' },
+      { id: 'jg5j1CLWG4VVEh80', showPopup: true },
+      { id: 'X492eCjcnUrymQin', url: 'https://paypal.me/binnichtaktiv' },
+      { id: 'QEEXxGJy2czgb6Xs', url: 'https://ko-fi.com/binnichtaktiv' },
+      { id: 'Y63QEMuVKR7FNrwJ', url: 'https://revolut.me/jonas2xn2' },
+      { id: 'p6CNeyNEjgmoRMqI', scrollTo: 'Lfnp7PZGx8M8UeSd' },
+      { id: 'acePVkjcQBExvwtc', url: 'https://binnichtaktiv.github.io/enhancement-tutorials' },
+      { id: 'N58yMl8HdNdVzqmn', url: 'https://odysee.com/@binnichtaktiv:a' },
+    ];
+    
+    buttons.forEach(button => {
+      const element = document.getElementById(button.id);
+      if (element) {
+        element.style.cursor = 'pointer';
+        element.style.borderRadius = '20px';
+        element.style.fontFamily = 'sans-serif';
+        
+        if (button.showPopup) {
+          element.addEventListener('click', showDiscordUsernamePopup);
+        } else if (button.scrollTo) {
+          element.addEventListener('click', function() {
+            document.getElementById(button.scrollTo).scrollIntoView({ behavior: 'smooth' });
+          });
+        } else {
+          element.addEventListener('click', function() {
+            window.open(button.url, '_blank');
+          });
+        }
       }
-    }
-  });
-}
-document.addEventListener('DOMContentLoaded', makeButtonsClickable);
-
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', makeButtonsClickable);
 </script>
+    
 
   <body>
     <div id="root">
@@ -3242,86 +3250,85 @@ document.addEventListener('DOMContentLoaded', makeButtonsClickable);
             </div>
         </div> 
           
-          <script>
-              async function loadCountries() {
-                  const response = await fetch('https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/refs/heads/main/json/countries.json');
-                  const data = await response.json();
-                  return data.countries;
-              }
-          
-              function getUserEmoji(timeZone, countries) {
-                  for (const country of countries) {
-                      if (country.timezones.includes(timeZone)) {
-                          return country.emoji;
-                      }
-                  }
-                  return "🌍";
-              }
-          
-              async function updateClock() {
-                  const countries = await loadCountries();
-                  const now = new Date();
-                  const options = {
-                      timeZone: 'Europe/Berlin',
-                      hour12: false,
-                      hour: '2-digit',
-                      minute: '2-digit',
-                  };
-                  const timeString = now.toLocaleTimeString('de-DE', options);
-                  const myClockElement = document.getElementById('my-time');
-                  const noteElement = document.getElementById('note');
-                  const userClockElement = document.getElementById('user-time');
-                  const userEmojiElement = document.getElementById('user-emoji');
-                  const yourTimeContainer = document.getElementById('your-time-container');
-          
-                  const hours = now.getHours();
-                  const minutes = now.getMinutes();
-                  const day = now.getDay(); // 0 (Sonntag) bis 6 (Samstag)
-          
-                  let message = "";
-          
-                  if (day >= 1 && day <= 5) { // Montag bis Freitag
-                    if ((hours === 7 && minutes >= 45) || (hours > 7 && hours < 14) || (hours === 14 && minutes === 0)) {
-                        message = "Probably at school at the moment";
-                    } else if (hours === 1 || hours === 0 || (hours >= 2 && hours < 7)) {
-                        message = "Probably sleeping at the moment";
-                    }
-                } else if (day === 0) { // Sonntag
-                    if ((hours === 1 && minutes >= 30) || (hours > 1 && hours < 10) || (hours === 10 && minutes <= 30)) {
-                        message = "Probably sleeping at the moment";
-                    }
-                } else if (day === 6) { // Samstag
-                    if (hours >= 9 && hours < 13) {
-                        message = "Probably not at home";
-                    } else if ((hours === 1 && minutes >= 30) || (hours > 1 && hours < 8) || (hours === 8 && minutes <= 30)) {
-                        message = "Probably sleeping at the moment";
-                    }
-                }
-          
-                  myClockElement.textContent = timeString;
-          
-                  // Setze die Notiz und passe den Abstand an
-                  if (message) {
-                      noteElement.textContent = "- " + message;
-                      noteElement.style.marginTop = '3px'
-                      noteElement.style.display = 'block';
-                      yourTimeContainer.style.marginTop = '-10px'; // Verringere den Abstand
-                  } else {
-                      noteElement.style.display = 'none';
-                      yourTimeContainer.style.marginTop = '0'; // Normaler Abstand
-                  }
-          
-                  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                  const userTimeString = now.toLocaleTimeString(undefined, { hour12: false, hour: '2-digit', minute: '2-digit' });
-                  userClockElement.textContent = userTimeString;
-          
-                  const userEmoji = getUserEmoji(userTimeZone, countries);
-                  userEmojiElement.textContent = userEmoji;
-              }
-          
-              setInterval(updateClock, 60000);
-              updateClock(); // Initial call to set the time immediately
-          </script>
+<script>
+    async function loadCountries() {
+        const response = await fetch('https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/refs/heads/main/json/countries.json');
+        const data = await response.json();
+        return data.countries;
+    }
+
+    function getUserEmoji(timeZone, countries) {
+        for (const country of countries) {
+            if (country.timezones.includes(timeZone)) {
+                return country.emoji;
+            }
+        }
+        return "🌍";
+    }
+
+    async function updateClock() {
+        const countries = await loadCountries();
+        const now = new Date();
+        const options = {
+            timeZone: 'Europe/Berlin',
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit',
+        };
+        const timeString = now.toLocaleTimeString('de-DE', options);
+        const myClockElement = document.getElementById('my-time');
+        const noteElement = document.getElementById('note');
+        const userClockElement = document.getElementById('user-time');
+        const userEmojiElement = document.getElementById('user-emoji');
+        const yourTimeContainer = document.getElementById('your-time-container');
+
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const day = now.getDay(); // 0 (Sunday) - 6 (Saturday)
+
+        let message = "";
+
+        if (day >= 1 && day <= 5) { // Montay - Friday
+          if ((hours === 7 && minutes >= 45) || (hours > 7 && hours < 14) || (hours === 14 && minutes === 0)) {
+              message = "Probably at school at the moment";
+          } else if (hours === 1 || hours === 0 || (hours >= 2 && hours < 7)) {
+              message = "Probably sleeping at the moment";
+          }
+      } else if (day === 0) { // Sunday
+          if ((hours === 1 && minutes >= 30) || (hours > 1 && hours < 10) || (hours === 10 && minutes <= 30)) {
+              message = "Probably sleeping at the moment";
+          }
+      } else if (day === 6) { // Saturday
+          if (hours >= 9 && hours < 13) {
+              message = "Probably not at home";
+          } else if ((hours === 1 && minutes >= 30) || (hours > 1 && hours < 8) || (hours === 8 && minutes <= 30)) {
+              message = "Probably sleeping at the moment";
+          }
+      }
+
+        myClockElement.textContent = timeString;
+
+        if (message) {
+            noteElement.textContent = "- " + message;
+            noteElement.style.marginTop = '3px'
+            noteElement.style.display = 'block';
+            yourTimeContainer.style.marginTop = '-10px';
+        } else {
+            noteElement.style.display = 'none';
+            yourTimeContainer.style.marginTop = '0';
+        }
+
+        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const userTimeString = now.toLocaleTimeString(undefined, { hour12: false, hour: '2-digit', minute: '2-digit' });
+        userClockElement.textContent = userTimeString;
+
+        const userEmoji = getUserEmoji(userTimeZone, countries);
+        userEmojiElement.textContent = userEmoji;
+    }
+
+    setInterval(updateClock, 60000);
+    updateClock();
+</script>
 
           <div id="imRvLXFhuIHhyKO5" style="z-index:4;">
             <div id="CdiCOcP1B8BWKMcG" style="padding-top:95.125%;transform:rotate(-30.31017862deg);">
@@ -3565,7 +3572,7 @@ document.addEventListener('DOMContentLoaded', makeButtonsClickable);
                 </p>
             </div>
             <div style="z-index:1; margin-top: 10px; text-align: center; width: 100%;">
-                <button id="dropdownToggle" onclick="toggleDropdown()" style="background: linear-gradient(90deg, #1f41bb, #d82cc3); border: none; border-radius: 20px; padding: 10px 20px; color: white; cursor: pointer; font-size: 16px; font-family: YAFdJo1JGkU-0;">
+                <button id="dropdownToggle" onclick="toggleDropdown()" style="background: linear-gradient(90deg, #1f41bb, #d82cc3); border: none; border-radius: 20px; padding: 6px 20px; color: white; cursor: pointer; font-size: 16px; font-family: YAFdJo1JGkU-0;">
                     Expand
                 </button>
                 <!-- Dropdown Content -->
@@ -3794,7 +3801,7 @@ document.addEventListener('DOMContentLoaded', makeButtonsClickable);
                 <div id="jbMNLVpXawCaYk8d" style="width:100%;height:100%;opacity:1.0;">
                   <div id="SPe4UwmDfX1VyuoN" class="video_container" style="transform:scale(1, 1);width:100%;height:100%;overflow:hidden;position:relative;">
                     <div id="HBcTqmqFRIVKpzxp" style="width:calc(100% * max(1, var(--scale-fill, 1)));height:calc(100% / min(1, var(--scale-fill, 1)));position:absolute;top:50%;left:50%;opacity:1.0;">
-                      <video src="videos/5162ee5b981fb5217ebf9ff034a0ffcf.mp4" playsinline="" preload="none" autoplay="" muted="" loop="" style="width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%;transform:translate(-50%, -50%) rotate(0deg);"></video>
+                      <video src="videos/cat.mp4" playsinline="" preload="none" autoplay="" muted="" loop="" style="width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%;transform:translate(-50%, -50%) rotate(0deg);"></video>
                     </div>
                   </div>
                 </div>
