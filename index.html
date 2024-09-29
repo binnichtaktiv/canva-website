@@ -3219,8 +3219,17 @@ document.addEventListener('DOMContentLoaded', makeButtonsClickable);
               </div>
             </div>
           </div>
+        
           <div id="hQT8UyYUHcPHnx5G" style="z-index:21; width: 500px; height: 270px; position: relative;">
-            <div id="geakaT7qNvRz8NAy" style="padding-top:57.59878419%; transform:rotate(0deg);">
+            <div id="clock" style="position: absolute; top: 2px; left: 10px; font-size: 14px; color: #fff; font-family: 'Arial', sans-serif; background-color: rgba(0, 0, 0, 0.7); padding: 10px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease;">
+                My Local Time: <span id="my-time" style="font-weight: bold; color: #4CAF50;">--:--</span><br>
+                <span id="note" style="margin: 0; line-height: 1.2; display: none; color: #FFC107; font-style: italic;">- Probably at school at the moment</span>
+                <span id="your-time-container">
+                    Your Time: <span id="user-time" style="font-weight: bold; color: #2196F3;">--:--</span> <span id="user-emoji">🌍</span>
+                </span>
+            </div>
+        
+            <div id="geakaT7qNvRz8NAy" style="padding-top:52%; transform:rotate(0deg); position: relative; top: 35px;">
                 <div id="UZJABENiLegQre6k" style="position:absolute; top:0; left:0; width:100%; height:100%;">
                     <div id="XRfB9RJg7zWQR4sA" style="width:100%; height:100%; opacity:1.0;">
                         <div id="zGTkEdIgLxIBtEtD" style="transform:scale(1, 1); width:100%; height:100%; overflow:hidden; position:relative;">
@@ -3231,15 +3240,96 @@ document.addEventListener('DOMContentLoaded', makeButtonsClickable);
                     </div>
                 </div>
             </div>
-        </div>
-        
+        </div> 
+          
+          <script>
+              async function loadCountries() {
+                  const response = await fetch('https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/refs/heads/main/json/countries.json');
+                  const data = await response.json();
+                  return data.countries;
+              }
+          
+              function getUserEmoji(timeZone, countries) {
+                  for (const country of countries) {
+                      if (country.timezones.includes(timeZone)) {
+                          return country.emoji;
+                      }
+                  }
+                  return "🌍";
+              }
+          
+              async function updateClock() {
+                  const countries = await loadCountries();
+                  const now = new Date();
+                  const options = {
+                      timeZone: 'Europe/Berlin',
+                      hour12: false,
+                      hour: '2-digit',
+                      minute: '2-digit',
+                  };
+                  const timeString = now.toLocaleTimeString('de-DE', options);
+                  const myClockElement = document.getElementById('my-time');
+                  const noteElement = document.getElementById('note');
+                  const userClockElement = document.getElementById('user-time');
+                  const userEmojiElement = document.getElementById('user-emoji');
+                  const yourTimeContainer = document.getElementById('your-time-container');
+          
+                  const hours = now.getHours();
+                  const minutes = now.getMinutes();
+                  const day = now.getDay(); // 0 (Sonntag) bis 6 (Samstag)
+          
+                  let message = "";
+          
+                  if (day >= 1 && day <= 5) { // Montag bis Freitag
+                    if ((hours === 7 && minutes >= 45) || (hours > 7 && hours < 14) || (hours === 14 && minutes === 0)) {
+                        message = "Probably at school at the moment";
+                    } else if (hours === 1 || hours === 0 || (hours >= 2 && hours < 7)) {
+                        message = "Probably sleeping at the moment";
+                    }
+                } else if (day === 0) { // Sonntag
+                    if ((hours === 1 && minutes >= 30) || (hours > 1 && hours < 10) || (hours === 10 && minutes <= 30)) {
+                        message = "Probably sleeping at the moment";
+                    }
+                } else if (day === 6) { // Samstag
+                    if (hours >= 9 && hours < 13) {
+                        message = "Probably not at home";
+                    } else if ((hours === 1 && minutes >= 30) || (hours > 1 && hours < 8) || (hours === 8 && minutes <= 30)) {
+                        message = "Probably sleeping at the moment";
+                    }
+                }
+          
+                  myClockElement.textContent = timeString;
+          
+                  // Setze die Notiz und passe den Abstand an
+                  if (message) {
+                      noteElement.textContent = "- " + message;
+                      noteElement.style.marginTop = '3px'
+                      noteElement.style.display = 'block';
+                      yourTimeContainer.style.marginTop = '-10px'; // Verringere den Abstand
+                  } else {
+                      noteElement.style.display = 'none';
+                      yourTimeContainer.style.marginTop = '0'; // Normaler Abstand
+                  }
+          
+                  const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                  const userTimeString = now.toLocaleTimeString(undefined, { hour12: false, hour: '2-digit', minute: '2-digit' });
+                  userClockElement.textContent = userTimeString;
+          
+                  const userEmoji = getUserEmoji(userTimeZone, countries);
+                  userEmojiElement.textContent = userEmoji;
+              }
+          
+              setInterval(updateClock, 60000);
+              updateClock(); // Initial call to set the time immediately
+          </script>
+
           <div id="imRvLXFhuIHhyKO5" style="z-index:4;">
             <div id="CdiCOcP1B8BWKMcG" style="padding-top:95.125%;transform:rotate(-30.31017862deg);">
               <div id="wohToBkExmvI1dp7" style="position:absolute;top:0px;left:0px;width:100%;height:100%;">
                 <div id="wamtktjBvvlggAXt" style="width:100%;height:100%;opacity:0.24;">
                   <div id="DwsKQG3KmljDazpv" style="transform:scale(1, 1);width:100%;height:100%;overflow:hidden;position:relative;">
                     <div id="xavwtZolRGLouDvn" style="width:calc(100% * max(1, var(--scale-fill, 1)));height:calc(100% / min(1, var(--scale-fill, 1)));position:absolute;top:50%;left:50%;opacity:1.0;animation:pulse 1.5s ease-in-out infinite;">
-                      <img src="images/background.png" alt="Gradient Blur Orange Purple Blue Green" loading="lazy" srcset="images/background.png 201w, images/1e230d5b940de58411049c06f853b312.png 401w" sizes="(max-width: 375px) 11.41092587vw, (min-width: 375.05px) and (max-width: 480px) 11.41092587vw, (min-width: 480.05px) and (max-width: 768px) 11.41092587vw, (min-width: 768.05px) and (max-width: 1024px) 11.41092587vw, (min-width: 1024.05px) 11.41092587vw" style="width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%;transform:translate(-50%, -50%) rotate(0deg);">
+                      <img src="images/background.png" alt="Gradient Blur Orange Purple Blue Green" loading="lazy" srcset="images/background.png 201w, images/background.png 401w" sizes="(max-width: 375px) 11.41092587vw, (min-width: 375.05px) and (max-width: 480px) 11.41092587vw, (min-width: 480.05px) and (max-width: 768px) 11.41092587vw, (min-width: 768.05px) and (max-width: 1024px) 11.41092587vw, (min-width: 1024.05px) 11.41092587vw" style="width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%;transform:translate(-50%, -50%) rotate(0deg);">
                     </div>
                   </div>
                 </div>
