@@ -3282,13 +3282,12 @@
         const userEmojiElement = document.getElementById('user-emoji');
         const yourTimeContainer = document.getElementById('your-time-container');
 
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
+        const [hours, minutes] = timeString.split(':').map(Number);
         const day = now.getDay(); // 0 (Sunday) - 6 (Saturday)
 
         let message = "";
 
-        if (day >= 1 && day <= 5) { // Montay - Friday
+        if (day >= 1 && day <= 5) { // Monday - Friday
           if ((hours === 7 && minutes >= 45) || (hours > 7 && hours < 14) || (hours === 14 && minutes === 0)) {
               message = "Probably at school at the moment";
           } else if (hours === 1 || hours === 0 || (hours >= 2 && hours < 7)) {
@@ -3305,6 +3304,7 @@
               message = "Probably sleeping at the moment";
           }
       }
+      
 
         myClockElement.textContent = timeString;
 
