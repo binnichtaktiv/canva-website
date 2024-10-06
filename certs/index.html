@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>certs site</title>
+    <title>Certificates</title>
     <meta name="description" content="" />
     <link rel="icon" href="https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/main/bna.ico" type="image/png" sizes="16x16">
     <link rel="icon" href="https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/main/bna.ico" type="image/png" sizes="32x32">
@@ -3708,13 +3708,13 @@
   <script>
     function makeButtonsClickable() {
       const buttons = [
-        { id: 'biVO734aGwe9GG3x', url: 'need own donation page!!'},
-        { id: 'B7Tbk9k3r96pbGoe', url: 'https://binnichtaktiv.github.io/enhancement-tutorials' },
-        { id: 'tDFh2FxVlqijIOxw', url: 'https://odysee.com/@binnichtaktiv:a' },
-        { id: 'VOtj2uuTeu5Gk7xW', url: 'https://t.me/binnichtaktiv' },
-        { id: 'rsMn5TkGV4gqFsTF', url: 'https://binnichtaktiv.github.io/tutorials/import-cert-esign' },
-        { id: 'OfBRhAG1tWUfuHAs', url: 'https://binnichtaktiv.github.io/tutorials/import-cert-appdb' },
-        { id: 'UQmoj2W39BXP9sE7', url: 'https://binnichtaktiv.github.io/canva-website' }
+        { id: 'biVO734aGwe9GG3x', url: 'need own donation page!!', sameTab: false },
+        { id: 'B7Tbk9k3r96pbGoe', url: 'https://binnichtaktiv.github.io/enhancement-tutorials', sameTab: false },
+        { id: 'tDFh2FxVlqijIOxw', url: 'https://odysee.com/@binnichtaktiv:a', sameTab: false },
+        { id: 'VOtj2uuTeu5Gk7xW', url: 'https://t.me/binnichtaktiv', sameTab: false },
+        { id: 'rsMn5TkGV4gqFsTF', url: 'https://binnichtaktiv.github.io/tutorials/import-cert-esign', sameTab: false },
+        { id: 'OfBRhAG1tWUfuHAs', url: 'https://binnichtaktiv.github.io/tutorials/import-cert-appdb', sameTab: false },
+        { id: 'UQmoj2W39BXP9sE7', url: 'https://binnichtaktiv.github.io/canva-website', sameTab: true }
       ];
       
       buttons.forEach(button => {
@@ -3732,13 +3732,17 @@
             });
           } else {
             element.addEventListener('click', function() {
-              window.open(button.url, '_blank');
+              if (button.sameTab) {
+                window.location.href = button.url;
+              } else {
+                window.open(button.url, '_blank');
+              }
             });
           }
         }
       });
     }
-    
+
     function navigateAndScroll(url, elementId) {
       window.open(url, '_blank').addEventListener('load', function() {
         const targetElement = this.document.getElementById(elementId);
