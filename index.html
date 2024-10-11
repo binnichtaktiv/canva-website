@@ -3057,12 +3057,12 @@
   </head>
 
 <script>
-  function showDiscordUsernamePopup() {
+function showDiscordUsernamePopup() {
     const popup = document.createElement('div');
     popup.style.position = 'fixed';
     popup.style.top = '50%';
     popup.style.left = '50%';
-    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.transform = 'translate(-50%, -50%) scale(0)';
     popup.style.backgroundColor = '#101728';
     popup.style.color = 'white';
     popup.style.padding = '40px';
@@ -3072,7 +3072,9 @@
     popup.style.zIndex = '9999';
     popup.style.width = '250px';
     popup.style.border = '1px solid white';
-    
+    popup.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+    popup.style.opacity = '0';
+
     const popupContent = document.createElement('div');
     popupContent.innerHTML = `
       <h2 style="font-size: 24px; margin-bottom: 20px;">My discord username:</h2>
@@ -3083,11 +3085,22 @@
   
     document.body.appendChild(popup);
   
+    setTimeout(() => {
+        popup.style.transform = 'translate(-50%, -50%) scale(1)';
+        popup.style.opacity = '1';
+    }, 10);
+
     const closeButton = document.getElementById('closePopup');
     closeButton.addEventListener('click', () => {
-      popup.remove();
+        popup.style.transform = 'translate(-50%, -50%) scale(0)';
+        popup.style.opacity = '0';
+
+        setTimeout(() => {
+            popup.remove();
+        }, 300);  // 300ms matches duration of transition
     });
-  }
+}
+
   
   function makeButtonsClickable() {
     const buttons = [
@@ -3575,9 +3588,7 @@
                 <button id="dropdownToggle" onclick="toggleDropdown()" style="background: linear-gradient(90deg, #1f41bb, #d82cc3); border: none; border-radius: 20px; padding: 6px 20px; color: white; cursor: pointer; font-size: 16px; font-family: YAFdJo1JGkU-0;">
                     Expand
                 </button>
-                <!-- Dropdown Content -->
                 <div id="dropdown-content" style="display: none; background-color: #0d1b2a; border-radius: 10px; padding: 10px; margin-top: 10px; width: 100%; box-sizing: border-box;">
-                    <!-- Main Buttons will be inserted here -->
                 </div>
             </div>
         </div>
@@ -3601,43 +3612,87 @@
         }
     
         function createMainButtons() {
-            const dropdownContent = document.getElementById("dropdown-content");
-            dropdownContent.innerHTML = '';
-    
-            const buttons = [
-                { name: 'Good iPA Libraries', json: 'https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/refs/heads/main/json/iPALibraries.json' },
-                { name: 'Cracked apps/games for macOS and Windows', json: 'https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/refs/heads/main/json/crackedAppsGames.json' },
-                { name: 'Movies, Series & Sport streaming', json: 'https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/refs/heads/main/json/streaming.json' },
-                { name: 'Spotify, Netflix and other subscriptions for cheaper prices', json: 'https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/refs/heads/main/json/cheapStuff.json' },
-                { name: 'Other useful stuff', json: 'https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/refs/heads/main/json/usefulStuff.json' }
-            ];
-    
-            buttons.forEach((button, index) => {
-                const mainButton = document.createElement('button');
-                mainButton.textContent = button.name;
-                mainButton.style.cssText = `
-                    width: 200px;
-                    background: linear-gradient(90deg, #1f41bb, #d82cc3);
-                    border: none;
-                    border-radius: 10px;
-                    padding: 10px;
-                    margin: 5px 0;
-                    color: white;
-                    cursor: pointer;
-                    font-family: YAFdJo1JGkU-0;  /* Schriftart hinzugefügt */
-                    font-size: 14px;
-                `;
-                mainButton.onclick = () => toggleSubDropdown(button.json, `sub-dropdown-${index}`);
-    
-                const subDropdown = document.createElement('div');
-                subDropdown.id = `sub-dropdown-${index}`;
-                subDropdown.style.cssText = "display: none; background-color: #14213d; border-radius: 10px; padding: 10px; margin-top: 5px;";
-    
-                dropdownContent.appendChild(mainButton);
-                dropdownContent.appendChild(subDropdown);
-            });
-        }
-    
+    const dropdownContent = document.getElementById("dropdown-content");
+    dropdownContent.innerHTML = '';
+
+    const buttons = [
+        { name: 'Good iPA Libraries', json: 'https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/refs/heads/main/json/iPALibraries.json' },
+        { name: 'Cracked apps/games for macOS and Windows', json: 'https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/refs/heads/main/json/crackedAppsGames.json' },
+        { name: 'Movies, Series & Sport streaming', json: 'https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/refs/heads/main/json/streaming.json' },
+        { name: 'Spotify, Netflix and other subscriptions for cheaper prices', json: 'https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/refs/heads/main/json/cheapStuff.json' },
+        { name: 'Other useful stuff', json: 'https://raw.githubusercontent.com/binnichtaktiv/binnichtaktiv.github.io/refs/heads/main/json/usefulStuff.json' }
+    ];
+
+    buttons.forEach((button, index) => {
+        const buttonContainer = document.createElement('div');
+        buttonContainer.style.cssText = 'width: 100%; margin-bottom: 10px;';
+
+        const mainButton = document.createElement('button');
+        mainButton.textContent = button.name;
+        mainButton.style.cssText = `
+            width: 100%;
+            background: linear-gradient(90deg, #1f41bb, #d82cc3);
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            color: white;
+            cursor: pointer;
+            font-family: YAFdJo1JGkU-0;
+            font-size: 14px;
+        `;
+        mainButton.onclick = () => toggleSubDropdown(button.json, `sub-dropdown-${index}`);
+
+        const subDropdown = document.createElement('div');
+        subDropdown.id = `sub-dropdown-${index}`;
+        subDropdown.style.cssText = "display: none; background-color: #14213d; border-radius: 10px; padding: 10px; margin-top: 5px;";
+
+        buttonContainer.appendChild(mainButton);
+        buttonContainer.appendChild(subDropdown);
+        dropdownContent.appendChild(buttonContainer);
+    });
+}
+
+function createButtonLink(item, container) {
+    const linkContainer = document.createElement('div');
+    linkContainer.style.cssText = "display: flex; flex-direction: column; align-items: flex-start; margin: 10px 0; width: 100%;";
+
+    const button = document.createElement('button');
+    button.textContent = item.button_text;
+    button.style.cssText = `
+        width: 100%;
+        background: linear-gradient(90deg, #1f41bb, #d82cc3);
+        border: none;
+        border-radius: 20px;
+        padding: 10px;
+        margin-bottom: 5px;
+        font-size: 16px;
+        color: white;
+        text-align: center;
+        font-family: YAFdJo1JGkU-0;
+    `;
+
+    const link = document.createElement('a');
+    link.href = item.button_link;
+    link.target = "_blank";
+    link.style.cssText = "color: white; text-decoration: none; width: 100%;";
+
+    const span = document.createElement('span');
+    span.textContent = item.text;
+    span.style.cssText = `
+        font-size: 14px;
+        font-family: YAFdJo1JGkU-0;
+        color: white;
+        width: 100%;
+        overflow: hidden;
+        white-space: pre-wrap;
+        word-break: break-word;
+    `;
+
+    link.appendChild(button);
+    linkContainer.appendChild(link);
+    linkContainer.appendChild(span);
+    container.appendChild(linkContainer);
+}
         function toggleSubDropdown(jsonFile, subDropdownId) {
             const subDropdown = document.getElementById(subDropdownId);
     
